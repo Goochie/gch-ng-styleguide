@@ -107,3 +107,92 @@ Their respective guides are located here and i encourage you to view them.
     ```
 
   - This aids with readability and reduces the volume of code "wrapped" inside the Angular framework
+  - 
+  
+
+
+
+## Controllers
+
+  - **controllerAs syntax**: Controllers are classes, so use the `controllerAs` syntax at all times
+
+    ```html
+    <!-- bad -->
+    <div ng-controller="MainCtrl">
+      {{ someObject }}
+    </div>
+
+    <!-- good -->
+    <div ng-controller="MainCtrl as main">
+      {{ main.someObject }}
+    </div>
+    ```
+
+  - In the DOM we get a variable per controller, which aids nested controller methods, avoiding any `$parent` calls
+
+  - The `controllerAs` syntax uses `this` inside controllers, which gets bound to `$scope`
+
+    ```javascript
+    // bad
+    function MainCtrl ($scope) {
+      $scope.someObject = {};
+      $scope.doSomething = function () {
+
+      };
+    }
+
+    // good
+    function MainCtrl () {
+      this.someObject = {};
+      this.doSomething = function () {
+
+      };
+    }
+    ```
+
+  - Only use `$scope` in `controllerAs` when necessary; for example, publishing and subscribing events using `$emit`, `$broadcast`, `$on` or `$watch`. Try to limit the use of these, however, and treat `$scope` uses as special
+
+  - **Inheritance**: Use prototypal inheritance when extending controller classes
+
+    ```javascript
+    function BaseCtrl () {
+      this.doSomething = function () {
+
+      };
+    }
+    BaseCtrl.prototype.someObject = {};
+    BaseCtrl.prototype.sharedSomething = function () {
+
+    };
+
+    AnotherCtrl.prototype = Object.create(BaseCtrl.prototype);
+
+    function AnotherCtrl () {
+      this.anotherSomething = function () {
+
+      };
+    }
+    ```
+
+  - Use `Object.create` with a polyfill for browser support
+
+  - **Zero-logic**: No logic inside a controller, delegate to services
+
+    ```javascript
+    // bad
+    function MainCtrl () {
+      this.doSomething = function () {
+
+      };
+    }
+
+    // good
+    function MainCtrl (SomeService) {
+      this.doSomething = SomeService.doSomething;
+    }
+    ```
+
+  - Think "skinny controller, fat service"
+
+**[Back to top](#table-of-contents)**
+
