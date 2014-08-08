@@ -31,7 +31,7 @@ Their respective guides are located here and i encourage you to view them.
 
 ## IIFE scoping
 
-  - **IIFE scoping**: To avoid polluting the global scope with our function declarations that get passed into Angular,  ensure build tasks wrap the concatenated files inside an IIFE
+  - **IIFE scoping**: To avoid polluting the global scope with our function declarations wrap them into an IIFE.
   
     ```javascript
     (function () {
@@ -44,19 +44,19 @@ Their respective guides are located here and i encourage you to view them.
 
       }
       
-      angular
-        .module('app')
-        .controller('MainCtrl', MainCtrl);
-      
       // SomeService.js
       function SomeService () {
 
       }
       
+      //----------------------
+      //Configure module
+      //----------------------
+      
       angular
         .module('app')
         .service('SomeService', SomeService);
-        
+        .controller('MainCtrl', MainCtrl);
       // ...
         
     })();
