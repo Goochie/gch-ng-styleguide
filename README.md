@@ -9,9 +9,9 @@ This styleguide comprises a combination of style's defined by [@toddmotto](//twi
 
 Their respective guides are located here and i encourage you to view them.
 
-[John's  guidelines](//github.com/johnpapa/angularjs-styleguide)
+*[John's  guidelines](//github.com/johnpapa/angularjs-styleguide)*
 
-[Todd's  guidelines](https://github.com/toddmotto/angularjs-styleguide)
+*[Todd's  guidelines](https://github.com/toddmotto/angularjs-styleguide)*
 
 ## Table of Contents
 
@@ -109,6 +109,58 @@ Their respective guides are located here and i encourage you to view them.
   - This aids with readability and reduces the volume of code "wrapped" inside the Angular framework
   - 
   
+## Services
+
+  - Services are classes and are instantiated with the `new` keyword. Use `this` for public methods and variables
+
+    ```javascript
+    function SomeService () {
+      this.someMethod = function () {
+
+      };
+    }
+    ```
+
+**[Back to top](#table-of-contents)**
+
+## Factory
+
+  - **Singletons**: Factories are singletons, return a host Object inside each Factory to avoid primitive binding issues
+
+    ```javascript
+    // bad
+    function AnotherService () {
+      var someValue = '';
+      var someMethod = function () {
+
+      };
+      return {
+        someValue: someValue,
+        someMethod: someMethod
+      };
+    }
+    ```
+    
+  - Using the module pattern means that primitive values cannot update alone.
+  - ??? This way, bindings are mirrored across the host Object. Primitive values cannot update alone using the revealing module pattern ????
+    
+    ```javascript
+    // good
+    function AnotherService () {
+    
+      var publicAPI = {};
+      publicAPI.someValue = '';
+      publicAPI.someMethod = function () {
+
+      };
+      return publicAPI;
+      
+    }
+    ```
+    
+    
+
+**[Back to top](#table-of-contents)**
 
 
 
