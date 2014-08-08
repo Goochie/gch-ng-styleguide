@@ -2,7 +2,7 @@
 
 *Organic AngularJS style guide for teams by [@billgch](//twitter.com/billgch)*
 
-The basis and underlying principles supporting these styles is that of producing *clean*, *cohesive* code that can adhere to *single responsibility principles*.
+The basis and underlying principles supporting these styles is that of producing *clean*, *cohesive* code that can adhere's to *single responsibility principles*.
 
 
 This styleguide comprises a combination of style's defined by [@toddmotto](//twitter.com/toddmotto) and [@john_papa](//twitter.com/john_papa), whilst incorporating my own guides and styles.
